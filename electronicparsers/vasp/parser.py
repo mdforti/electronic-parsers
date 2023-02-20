@@ -552,7 +552,7 @@ class OutcarContentParser(ContentParser):
             val = section.get(key)
             if val is not None:
                 energies[key] = val * multiplier
-
+                print (key, val, multiplier, val*multiplier)
         energies.update(section.get('energy_components', {}))
         return energies
 
@@ -1362,7 +1362,7 @@ class VASPParser:
 
                 try:
                     val = val * ureg.eV
-                    if metainfo_key.startswith('energy_'):
+                    if metainfo_key.startswith('energy_') and ('energy_' in key):
                         sec_energy.m_add_sub_section(getattr(
                             Energy, metainfo_key.replace('energy_', '').lower()), EnergyEntry(value=val))
                     else:
